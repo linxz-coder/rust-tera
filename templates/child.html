@@ -1,0 +1,8 @@
+{% extends "hello.html" %}
+
+{% block title %}子页面 - {{ super() }}{% endblock title %}
+
+{% block content %}
+<h2>这是子页面</h2>
+<p>欢迎，{{ name }}！这是一个继承自 hello.html 的页面。</p>
+{% endblock content %}

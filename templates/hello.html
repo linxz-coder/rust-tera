@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Tera模板示例{% endblock title %}</title>
+</head>
+<body>
+    <header>
+        <h1>我的网站</h1>
+    </header>
+    <main>
+        {% block content %}
+        <h2>你好, {{ name }}!</h2>
+        {% endblock content %}
+    </main>
+    <footer>
+        <p>&copy; 2024 我的网站</p>
+    </footer>
+</body>
+</html>
