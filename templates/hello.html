@@ -7,6 +7,42 @@
 <body>
     <header>
         <h1>我的网站</h1>
+        
+        {# raw块 #}
+        <p>{% raw %}
+            {{ name }}
+            {% endraw %}
+        </p>
+
+        {# 变量 #}
+        {% set var = "hi, there." %}
+        <p>{{var}}</p>
+
+        {# 这是tera注释 #}
+         <!--这是html的注释-->
+
+         {# 连接符~ #}
+        <p>{{"hello " ~ "world " ~ var }}</p>
+
+        {# in判断 #}
+         <p>{{"rust" in "trust"}}</p>
+
+         {# if判断 #}
+          <p>
+            {% if var == "hi, there." %}
+                {{var}}
+            {% else %}
+                "not hi, there."
+            {% endif %}
+          </p>
+
+          {# for循环  #}
+           {# 数据对象在后端定义 #}
+           {% for info in user_infos %}
+            <p>{{info.name}}:{{info.age}}</p>
+           {% endfor %}
+    
+           {% include "another.html" %}
     </header>
     <main>
         {% block content %}

@@ -1,9 +1,16 @@
 use actix_web::{get, App, HttpResponse, HttpServer, Responder};
 use tera::Tera;
 use std::sync::Mutex;
+use serde::Serialize;  // 添加这行来导入 Serialize
 
 struct AppState {
     tera: Mutex<Tera>,
+}
+
+#[derive(Serialize)]
+struct UserInfo {
+    name: String,
+    age: u32,
 }
 
 #[get("/")]
@@ -12,7 +19,15 @@ async fn index(data: actix_web::web::Data<AppState>) -> impl Responder {
     tera.full_reload().unwrap();
 
     let mut context = tera::Context::new();
+    
+    let user_infos = vec![
+        UserInfo { name: "张三".to_string(), age: 18 },
+        UserInfo { name: "李四".to_string(), age: 20 },
+        UserInfo { name: "王五".to_string(), age: 22 },
+    ];
+
     context.insert("name", "世界");
+    context.insert("user_infos", &user_infos);
 
     match tera.render("hello.html", &context) {
         Ok(rendered) => HttpResponse::Ok()
